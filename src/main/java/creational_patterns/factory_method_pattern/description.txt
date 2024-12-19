@@ -1,0 +1,6 @@
+                            Factory Method Pattern (Фабричний метод)
+
+Purpose: Allows you to create objects of a specific type through a shared interface by delegating
+ creation to subclasses.
+
+Мета: Дозволяє створювати об'єкти певного типу через спільний інтерфейс, делегуючи створення підкласам.
