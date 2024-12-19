@@ -1,0 +1,5 @@
+                            Prototype (Прототип)
+
+Purpose: Creates new objects by copyung existing objects instead of creating them from scratch.
+
+Мета: Створює нові об'єкти шляхом копіювання вже існуючих об'єктів замість створення їх з нуля.
