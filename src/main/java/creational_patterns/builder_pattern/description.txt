@@ -1,0 +1,5 @@
+                        Builder (Будівельник)
+
+Purpose: Simplifies the creation of complex objects by step-by-step assembly using different parts.
+
+Мета: Спрощує створення складних об'єктів шляхом поетапної збірки з використанням різних частин.
