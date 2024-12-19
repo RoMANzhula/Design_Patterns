@@ -1,0 +1,6 @@
+                        Abstract Factory (Абстракта фабрика)
+
+Purpose: Provides an interface for creating a family of interdependent objects without specifying
+ their specific classes.
+
+Мета: Забезпечує інтерфейс для створення сімейства взаємозалежних об'єктів без зазначення їх конкретних класів.
