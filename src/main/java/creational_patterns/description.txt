@@ -1,0 +1,7 @@
+                Creational Patterns(Породжувальні патерни)
+
+Creational Patterns are responsible for how objects are created in a program, providing flexibility and
+ control over the creation process.
+
+Породжувальні патерни відповідають за способи створення об'єктів у програмі, забезпечуючи
+ гнучкість та контроль над процесом створення.
