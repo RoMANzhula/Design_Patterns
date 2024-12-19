@@ -1,0 +1,5 @@
+                    Singleton (Одинак)
+
+Purpose: To guarantee that a class has only one instance and to provide a global access point to it.
+
+Мета: Гарантувати, що у класу є тільки один екземпляр і забезпечити глобальну точку доступу до нього.
