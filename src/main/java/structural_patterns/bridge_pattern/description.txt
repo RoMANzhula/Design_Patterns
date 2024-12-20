@@ -1,0 +1,59 @@
+                            Bridge (Міст)
+
+Purpose: Separates the abstraction from the implementation so that they can be changed independently.
+
+Мета: Відділяє абстракцію від реалізації, щоб їх можна було змінювати незалежно.
+
+
+
+
+// Інтерфейс реалізації
+interface Renderer {
+    void render(String shape);
+}
+
+// Реалізації
+class VectorRenderer implements Renderer {
+    public void render(String shape) {
+        System.out.println("Rendering " + shape + " as vectors.");
+    }
+}
+
+class RasterRenderer implements Renderer {
+    public void render(String shape) {
+        System.out.println("Rendering " + shape + " as pixels.");
+    }
+}
+
+// Абстракція
+abstract class Shape {
+    protected Renderer renderer;
+
+    public Shape(Renderer renderer) {
+        this.renderer = renderer;
+    }
+
+    public abstract void draw();
+}
+
+// Конкретна абстракція
+class Circle extends Shape {
+    public Circle(Renderer renderer) {
+        super(renderer);
+    }
+
+    public void draw() {
+        renderer.render("Circle");
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        Shape circle1 = new Circle(new VectorRenderer());
+        circle1.draw();
+
+        Shape circle2 = new Circle(new RasterRenderer());
+        circle2.draw();
+    }
+}
