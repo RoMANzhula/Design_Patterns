@@ -1,0 +1,85 @@
+                        Decorator (Декоратор)
+
+Purpose: Adds new functionality to an object dynamically without changing its structure.
+
+Мета: Додає нову функціональність об'єкту динамічно, не змінюючи його структуру.
+
+
+
+
+// Базовий інтерфейс
+interface Coffee {
+    String getDescription();
+    double getCost();
+}
+
+// Базовий клас
+class SimpleCoffee implements Coffee {
+    public String getDescription() {
+        return "Simple Coffee";
+    }
+
+    public double getCost() {
+        return 5.0;
+    }
+}
+
+// Декоратор
+class CoffeeDecorator implements Coffee {
+    protected Coffee coffee;
+
+    public CoffeeDecorator(Coffee coffee) {
+        this.coffee = coffee;
+    }
+
+    public String getDescription() {
+        return coffee.getDescription();
+    }
+
+    public double getCost() {
+        return coffee.getCost();
+    }
+}
+
+// Декоратори
+class MilkDecorator extends CoffeeDecorator {
+    public MilkDecorator(Coffee coffee) {
+        super(coffee);
+    }
+
+    public String getDescription() {
+        return coffee.getDescription() + ", Milk";
+    }
+
+    public double getCost() {
+        return coffee.getCost() + 1.5;
+    }
+}
+
+class SugarDecorator extends CoffeeDecorator {
+    public SugarDecorator(Coffee coffee) {
+        super(coffee);
+    }
+
+    public String getDescription() {
+        return coffee.getDescription() + ", Sugar";
+    }
+
+    public double getCost() {
+        return coffee.getCost() + 0.5;
+    }
+}
+
+// Використння
+public class Main {
+    public static void main(String[] args) {
+        Coffee coffee = new SimpleCoffee();
+        System.out.println(coffee.getDescription() + " = $" + coffee.getCost());
+
+        coffee = new MilkDecorator(coffee);
+        System.out.println(coffee.getDescription() + " = $" + coffee.getCost());
+
+        coffee = new SugarDecorator(coffee);
+        System.out.println(coffee.getDescription() + " = $" + coffee.getCost());
+    }
+}
