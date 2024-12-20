@@ -1,0 +1,94 @@
+                        Adapter
+
+Purpose: Allows objects with incompatible interfaces to work together.
+
+Мета: Дозволяє об'єктам з несумісними інтерфейсами працювати разом.
+
+
+
+
+// Існуючий інтерфейс
+interface MediaPlayer {
+    void play(String audioType, String fileName);
+}
+
+// Реалізація інтерфейсу
+class AudioPlayer implements MediaPlayer {
+    public void play(String audioType, String fileName) {
+        if (audioType.equalsIgnoreCase("mp3")) {
+            System.out.println("Playing mp3 file: " + fileName);
+        } else {
+            System.out.println("Invalid format: " + audioType);
+        }
+    }
+}
+
+// Несумісний інтерфейс
+interface AdvancedMediaPlayer {
+    void playVlc(String fileName);
+    void playMp4(String fileName);
+}
+
+// Реалізація несумісного інтерфейсу
+class VlcPlayer implements AdvancedMediaPlayer {
+    public void playVlc(String fileName) {
+        System.out.println("Playing vlc file: " + fileName);
+    }
+
+    public void playMp4(String fileName) { /* Не реалізовано */ }
+}
+
+class Mp4Player implements AdvancedMediaPlayer {
+    public void playVlc(String fileName) { /* Не реалізовано */ }
+    public void playMp4(String fileName) {
+        System.out.println("Playing mp4 file: " + fileName);
+    }
+}
+
+// Адаптер для несумісного інтерфейсу
+class MediaAdapter implements MediaPlayer {
+    AdvancedMediaPlayer advancedMediaPlayer;
+
+    public MediaAdapter(String audioType) {
+        if (audioType.equalsIgnoreCase("vlc")) {
+            advancedMediaPlayer = new VlcPlayer();
+        } else if (audioType.equalsIgnoreCase("mp4")) {
+            advancedMediaPlayer = new Mp4Player();
+        }
+    }
+
+    public void play(String audioType, String fileName) {
+        if (audioType.equalsIgnoreCase("vlc")) {
+            advancedMediaPlayer.playVlc(fileName);
+        } else if (audioType.equalsIgnoreCase("mp4")) {
+            advancedMediaPlayer.playMp4(fileName);
+        }
+    }
+}
+
+// Клас, що використовує адаптер
+class AudioPlayerWithAdapter implements MediaPlayer {
+    MediaAdapter mediaAdapter;
+
+    public void play(String audioType, String fileName) {
+        if (audioType.equalsIgnoreCase("mp3")) {
+            System.out.println("Playing mp3 file: " + fileName);
+        } else if (audioType.equalsIgnoreCase("vlc") || audioType.equalsIgnoreCase("mp4")) {
+            mediaAdapter = new MediaAdapter(audioType);
+            mediaAdapter.play(audioType, fileName);
+        } else {
+            System.out.println("Invalid format: " + audioType);
+        }
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        AudioPlayerWithAdapter player = new AudioPlayerWithAdapter();
+        player.play("mp3", "song.mp3");
+        player.play("mp4", "video.mp4");
+        player.play("vlc", "movie.vlc");
+        player.play("avi", "unsupported.avi");
+    }
+}
