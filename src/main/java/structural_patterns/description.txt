@@ -1,0 +1,7 @@
+                        Structural Patterns (Структуровані патерни)
+
+Structural patterns help build and manage relationships between classes and objects. They simplify the structure
+ of the program and make it more flexible.
+
+Структурні патерни допомагають будувати та керувати відносинами між класами та об'єктами. Вони
+спрощують структуру програми та роблять її більш гнучкою.
