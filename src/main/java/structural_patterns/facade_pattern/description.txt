@@ -1,0 +1,63 @@
+                            Facade (Фасад)
+
+Purpose: Provides a simplified interface for working with a complex subsystem.
+
+Мета: Надає спрощений інтерфейс для роботи зі складною підсистемою.
+
+
+
+
+// Підсистема
+class CPU {
+    public void start() {
+        System.out.println("CPU started.");
+    }
+}
+
+class Memory {
+    public void load() {
+        System.out.println("Memory loaded.");
+    }
+}
+
+class HardDrive {
+    public void read() {
+        System.out.println("Hard drive reading.");
+    }
+}
+
+// Фасад
+class ComputerFacade {
+    private CPU cpu;
+    private Memory memory;
+    private HardDrive hardDrive;
+
+    public ComputerFacade() {
+        cpu = new CPU();
+        memory = new Memory();
+        hardDrive = new HardDrive();
+    }
+
+        public void startComputer() {
+            try {
+                cpu.start();
+                memory.load();
+                hardDrive.read();
+                System.out.println("Computer is running.");
+            } catch (Exception e) {
+                System.out.println("Error during computer startup: " + e.getMessage());
+            }
+        }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        CPU cpu = new CPU();
+        Memory memory = new Memory();
+        HardDrive hardDrive = new HardDrive();
+
+        ComputerFacade computer = new ComputerFacade(cpu, memory, hardDrive);
+        computer.startComputer();
+    }
+}
