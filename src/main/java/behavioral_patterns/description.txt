@@ -1,0 +1,7 @@
+                    Behavioral Patterns (Поведінкові патерни)
+
+Behavioral patterns describe methods of interaction of objects, distribution of responsibilities between them,
+as well as communication and control over the performance of tasks.
+
+Поведінкові патерни описують способи взаємодії об'єктів, розподілу обов'язків між ними, а також
+комунікацію та контроль над виконанням завдань.
