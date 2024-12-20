@@ -1,0 +1,58 @@
+                        Composite (Композит)
+
+Purpose: Represents a group of objects as a single object. Composite allows clients to work with individual
+         objects and groups of objects in the same way.
+
+Мета: Представляє групу об'єктів як один об'єкт. Композит дозволяє клієнтам працювати з окремими
+      об'єктами і групами об'єктів однаково.
+
+
+
+// Компонент
+interface Graphic {
+    void draw();
+}
+
+// Лист
+class Circle implements Graphic {
+    public void draw() {
+        System.out.println("Drawing a Circle");
+    }
+}
+
+class Rectangle implements Graphic {
+    public void draw() {
+        System.out.println("Drawing a Rectangle");
+    }
+}
+
+// Композит
+class CompositeGraphic implements Graphic {
+    private List<Graphic> graphics = new ArrayList<>();
+
+    public void add(Graphic graphic) {
+        graphics.add(graphic);
+    }
+
+    public void remove(Graphic graphic) {
+        graphics.remove(graphic);
+    }
+
+    public void draw() {
+        for (Graphic graphic : graphics) {
+            graphic.draw();
+        }
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        CompositeGraphic composite = new CompositeGraphic();
+        composite.add(new Circle());
+        composite.add(new Rectangle());
+
+        System.out.println("Drawing composite:");
+        composite.draw();
+    }
+}
