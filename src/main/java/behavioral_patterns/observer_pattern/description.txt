@@ -5,3 +5,65 @@ Purpose: Defines a one-to-many relationship between objects. When one object cha
 
 Мета: Визначає залежність "один-до-багатьох" між об'єктами. Коли один об'єкт змінюється, всі залежні
       від нього об'єкти отримують сповіщення.
+
+
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+// Спостерігач (Observer)
+interface Observer {
+    void update(String message);
+}
+
+// Суб'єкт (Subject)
+class Subject {
+    private List<Observer> observers = new ArrayList<>();
+
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    public void notifyObservers(String message) {
+        for (Observer observer : observers) {
+            observer.update(message);
+        }
+    }
+}
+
+// Конкретний спостерігач
+class User implements Observer {
+    private String name;
+
+    public User(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void update(String message) {
+        System.out.println(name + " отримав повідомлення: " + message);
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        Subject subject = new Subject();
+
+        Observer user1 = new User("Анна");
+        Observer user2 = new User("Петро");
+
+        subject.addObserver(user1);
+        subject.addObserver(user2);
+
+        subject.notifyObservers("Система оновлена!");
+        subject.removeObserver(user1);
+        subject.notifyObservers("Друге повідомлення!");
+    }
+}
