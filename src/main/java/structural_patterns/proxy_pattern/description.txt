@@ -1,0 +1,57 @@
+                            Proxy (Замісник)
+
+Purpose: Creates a surrogate pr wrapper for a real object to control access to it.
+
+Мета: Створює сурогат або обгортку для реального об'єкта, щоб контролювати доступ до нього.
+
+
+
+
+// Інтерфейс
+interface Image {
+    void display();
+}
+
+// Реальний об'єкт
+class RealImage implements Image {
+    private String fileName;
+
+    public RealImage(String fileName) {
+        this.fileName = fileName;
+        loadFromDisk();
+    }
+
+    private void loadFromDisk() {
+        System.out.println("Loading " + fileName);
+    }
+
+    public void display() {
+        System.out.println("Displaying " + fileName);
+    }
+}
+
+// Замісник
+class ProxyImage implements Image {
+    private RealImage realImage;
+    private String fileName;
+
+    public ProxyImage(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void display() {
+        if (realImage == null) {
+            realImage = new RealImage(fileName);
+        }
+        realImage.display();
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        Image image = new ProxyImage("photo.jpg");
+        image.display(); // Завантаження і відображення
+        image.display(); // Лише відображення
+    }
+}
