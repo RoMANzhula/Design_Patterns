@@ -1,0 +1,46 @@
+                        Flyweight or Fly Weight (Прототип)
+
+Purpose: Reduces memory consumption by saving shared objects (lightweight elements).
+
+Мета: Зменшує споживання пам'яті шляхом збереження спільних об'єктів (легковагових елементів).
+
+
+
+
+// Flyweight
+interface Shape {
+    void draw(String color);
+}
+
+// Конкретний Flyweight
+class Circle implements Shape {
+    private String intrinsicState = "Circle";
+
+    public void draw(String color) {
+        System.out.println("Drawing " + intrinsicState + " with color " + color);
+    }
+}
+
+// Flyweight Factory
+class ShapeFactory {
+    private static final Map<String, Shape> shapes = new HashMap<>();
+
+    public static Shape getCircle() {
+        if (!shapes.containsKey("Circle")) {
+            shapes.put("Circle", new Circle());
+            System.out.println("Creating new Circle object.");
+        }
+        return shapes.get("Circle");
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        Shape circle1 = ShapeFactory.getCircle();
+        circle1.draw("Red");
+
+        Shape circle2 = ShapeFactory.getCircle();
+        circle2.draw("Blue");
+    }
+}
