@@ -1,0 +1,54 @@
+                                 Memento (Мементо)
+
+Purpose: Stores the internal state of an object so that it can be restored later without breaking encapsulation.
+
+Мета: Зберігає внутрішній стан об'єкта таким чином, щоб його можна було пізніше відновити, не порушуючи інкапсуляцію.
+
+
+
+
+// Модель, яка зберігає стан
+class Memento {
+    private String state;
+
+    public Memento(String state) {
+        this.state = state;
+    }
+
+    public String getState() {
+        return state;
+    }
+}
+
+// Клас, який зберігає та відновлює стан
+class Originator {
+    private String state;
+
+    public void setState(String state) {
+        this.state = state;
+        System.out.println("Стан встановлено: " + state);
+    }
+
+    public Memento saveStateToMemento() {
+        return new Memento(state);
+    }
+
+    public void getStateFromMemento(Memento memento) {
+        state = memento.getState();
+        System.out.println("Стан відновлений: " + state);
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        Originator originator = new Originator();
+        Memento memento;
+
+        originator.setState("Стан 1");
+        memento = originator.saveStateToMemento();
+
+        originator.setState("Стан 2");
+        originator.getStateFromMemento(memento);  // Відновлюємо стан "Стан 1"
+    }
+}
