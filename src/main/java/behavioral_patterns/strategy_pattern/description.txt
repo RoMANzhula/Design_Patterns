@@ -1,0 +1,66 @@
+                            Strategy (ВСтратегія)
+
+Purpose: Allows you to define a family of algorithms and encapsulate them as separate classes so that you can
+         dynamically replace one algorithm with another.
+
+Мета: Дозволяє визначати родину алгоритмів та інкапсулювати їх у вигляді окремих класів, щоб можна було
+      динамічно замінювати один алгоритм іншим.
+
+
+
+
+// Інтерфейс стратегії
+interface PaymentStrategy {
+    void pay(int amount);
+}
+
+// Реалізації стратегій
+class CreditCardPayment implements PaymentStrategy {
+    private String cardNumber;
+
+    public CreditCardPayment(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public void pay(int amount) {
+        System.out.println("Оплата " + amount + "$ за допомогою кредитної карти: " + cardNumber);
+    }
+}
+
+class PayPalPayment implements PaymentStrategy {
+    private String email;
+
+    public PayPalPayment(String email) {
+        this.email = email;
+    }
+
+    public void pay(int amount) {
+        System.out.println("Оплата " + amount + "$ через PayPal: " + email);
+    }
+}
+
+// Контекст
+class ShoppingCart {
+    private PaymentStrategy paymentStrategy;
+
+    public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
+        this.paymentStrategy = paymentStrategy;
+    }
+
+    public void checkout(int amount) {
+        paymentStrategy.pay(amount);
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart();
+
+        cart.setPaymentStrategy(new CreditCardPayment("1234-5678-9876-5432"));
+        cart.checkout(100);
+
+        cart.setPaymentStrategy(new PayPalPayment("user@example.com"));
+        cart.checkout(200);
+    }
+}
