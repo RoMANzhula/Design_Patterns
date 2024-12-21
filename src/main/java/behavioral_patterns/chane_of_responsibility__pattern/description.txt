@@ -1,0 +1,68 @@
+                    Chain of Responsibility (Ланцюг відповідальності)
+
+Purpose: Allows you to pass a request along a chain of handlers. Each handler can process the request or pass it on
+         to the next handler in the chain.
+
+Мета: Дозволяє передавати запит по ланцюгу обробників. Кожен обробник може обробити запит або передати його
+      наступному обробнику в ланцюзі.
+
+
+
+
+// Базовий обробник
+abstract class Handler {
+    protected Handler nextHandler;
+
+    public void setNextHandler(Handler nextHandler) {
+        this.nextHandler = nextHandler;
+    }
+
+    public abstract void handleRequest(int request);
+}
+
+// Конкретні обробники
+class ConcreteHandlerA extends Handler {
+    public void handleRequest(int request) {
+        if (request <= 10) {
+            System.out.println("Обробник A обробив запит: " + request);
+        } else if (nextHandler != null) {
+            nextHandler.handleRequest(request);
+        }
+    }
+}
+
+class ConcreteHandlerB extends Handler {
+    public void handleRequest(int request) {
+        if (request <= 20) {
+            System.out.println("Обробник B обробив запит: " + request);
+        } else if (nextHandler != null) {
+            nextHandler.handleRequest(request);
+        }
+    }
+}
+
+class ConcreteHandlerC extends Handler {
+    public void handleRequest(int request) {
+        if (request > 20) {
+            System.out.println("Обробник C обробив запит: " + request);
+        } else if (nextHandler != null) {
+            nextHandler.handleRequest(request);
+        }
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        Handler handlerA = new ConcreteHandlerA();
+        Handler handlerB = new ConcreteHandlerB();
+        Handler handlerC = new ConcreteHandlerC();
+
+        handlerA.setNextHandler(handlerB);
+        handlerB.setNextHandler(handlerC);
+
+        handlerA.handleRequest(5);  // Обробник A обробив запит: 5
+        handlerA.handleRequest(15); // Обробник B обробив запит: 15
+        handlerA.handleRequest(25); // Обробник C обробив запит: 25
+    }
+}
