@@ -3,3 +3,34 @@
 Purpose: To guarantee that a class has only one instance and to provide a global access point to it.
 
 Мета: Гарантувати, що у класу є тільки один екземпляр і забезпечити глобальну точку доступу до нього.
+
+
+
+
+public class Singleton {
+    // Статична змінна для зберігання єдиного екземпляра
+    private static Singleton instance;
+
+    // Приватний конструктор для заборони створення об'єктів
+    private Singleton() {}
+
+    // Метод для отримання екземпляра
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    public void showMessage() {
+        System.out.println("Це Singleton приклад!");
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        Singleton singleton = Singleton.getInstance();
+        singleton.showMessage();
+    }
+}
