@@ -4,3 +4,57 @@ Purpose: Provides an interface for creating a family of interdependent objects w
  their specific classes.
 
 Мета: Забезпечує інтерфейс для створення сімейства взаємозалежних об'єктів без зазначення їх конкретних класів.
+
+
+
+
+// Інтерфейси продуктів
+interface Chair {
+    void sitOn();
+}
+
+interface Table {
+    void placeItems();
+}
+
+// Конкретні продукти
+class ModernChair implements Chair {
+    public void sitOn() {
+        System.out.println("Сиджу на сучасному стільці.");
+    }
+}
+
+class ModernTable implements Table {
+    public void placeItems() {
+        System.out.println("Розміщую предмети на сучасному столі.");
+    }
+}
+
+// Абстрактна фабрика
+interface FurnitureFactory {
+    Chair createChair();
+    Table createTable();
+}
+
+// Конкретна фабрика
+class ModernFurnitureFactory implements FurnitureFactory {
+    public Chair createChair() {
+        return new ModernChair();
+    }
+
+    public Table createTable() {
+        return new ModernTable();
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        FurnitureFactory factory = new ModernFurnitureFactory();
+        Chair chair = factory.createChair();
+        Table table = factory.createTable();
+
+        chair.sitOn();
+        table.placeItems();
+    }
+}
