@@ -1,0 +1,51 @@
+                                Visitor (Відвідувач)
+
+Purpose: Adds new operations to objects without changing their code.
+
+Мета: Додає нові операції до об'єктів без зміни їхнього коду.
+
+
+
+
+interface Element {
+    void accept(Visitor visitor);
+}
+
+class ConcreteElementA implements Element {
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+}
+
+class ConcreteElementB implements Element {
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+}
+
+interface Visitor {
+    void visit(ConcreteElementA elementA);
+    void visit(ConcreteElementB elementB);
+}
+
+class ConcreteVisitor implements Visitor {
+    public void visit(ConcreteElementA elementA) {
+        System.out.println("Обробка ConcreteElementA");
+    }
+
+    public void visit(ConcreteElementB elementB) {
+        System.out.println("Обробка ConcreteElementB");
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        List<Element> elements = List.of(new ConcreteElementA(), new ConcreteElementB());
+        Visitor visitor = new ConcreteVisitor();
+
+        for (Element element : elements) {
+            element.accept(visitor);
+        }
+    }
+}
