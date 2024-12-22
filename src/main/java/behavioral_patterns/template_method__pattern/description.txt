@@ -1,0 +1,58 @@
+                      Template Method Pattern (Шаблонний метод)
+
+Purpose: Defines the backbone of an algorithm in a base class, allowing subclasses to refine certain steps of the
+         algorithm without changing its structure.
+
+Мета: Визначає кістяк алгоритму в базовому класі, дозволяючи підкласам уточнювати певні кроки алгоритму без
+      зміни його структури.
+
+
+
+
+abstract class Game {
+    abstract void initialize();
+    abstract void startPlay();
+    abstract void endPlay();
+
+    // Шаблонний метод
+    public final void play() {
+        initialize();
+        startPlay();
+        endPlay();
+    }
+}
+
+class Football extends Game {
+    void initialize() {
+        System.out.println("Футбол: Ініціалізація гри.");
+    }
+    void startPlay() {
+        System.out.println("Футбол: Початок гри.");
+    }
+    void endPlay() {
+        System.out.println("Футбол: Кінець гри.");
+    }
+}
+
+class Cricket extends Game {
+    void initialize() {
+        System.out.println("Крикет: Ініціалізація гри.");
+    }
+    void startPlay() {
+        System.out.println("Крикет: Початок гри.");
+    }
+    void endPlay() {
+        System.out.println("Крикет: Кінець гри.");
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        Game game = new Football();
+        game.play();
+
+        game = new Cricket();
+        game.play();
+    }
+}
