@@ -1,0 +1,42 @@
+                                    Iterator (Ітератор)
+
+Purpose: Provides consistent access to the elements of the collection without revealing int internal structure.
+
+Мета: Забезпечує послідовний доступ до елементів колекції без розкриття її внутрішньої структури.
+
+
+
+
+interface Iterator<T> {
+    boolean hasNext();
+    T next();
+}
+
+class NameIterator implements Iterator<String> {
+    private String[] names;
+    private int index;
+
+    public NameIterator(String[] names) {
+        this.names = names;
+    }
+
+    public boolean hasNext() {
+        return index < names.length;
+    }
+
+    public String next() {
+        return hasNext() ? names[index++] : null;
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        String[] names = {"Олег", "Ірина", "Максим"};
+        Iterator<String> iterator = new NameIterator(names);
+
+        while (iterator.hasNext()) {
+            System.out.println("Ім'я: " + iterator.next());
+        }
+    }
+}
