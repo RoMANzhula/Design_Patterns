@@ -3,3 +3,59 @@
 Purpose: Simplifies the creation of complex objects by step-by-step assembly using different parts.
 
 Мета: Спрощує створення складних об'єктів шляхом поетапної збірки з використанням різних частин.
+
+
+
+
+// Клас продукту
+class House {
+    private String foundation;
+    private String structure;
+    private String roof;
+
+    // Вкладений клас Builder
+    public static class Builder {
+        private String foundation;
+        private String structure;
+        private String roof;
+
+        public Builder setFoundation(String foundation) {
+            this.foundation = foundation;
+            return this;
+        }
+
+        public Builder setStructure(String structure) {
+            this.structure = structure;
+            return this;
+        }
+
+        public Builder setRoof(String roof) {
+            this.roof = roof;
+            return this;
+        }
+
+        public House build() {
+            House house = new House();
+            house.foundation = this.foundation;
+            house.structure = this.structure;
+            house.roof = this.roof;
+            return house;
+        }
+    }
+
+    public void showDetails() {
+        System.out.println("House with " + foundation + ", " + structure + " and " + roof);
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        House house = new House.Builder()
+                        .setFoundation("Concrete Foundation")
+                        .setStructure("Wooden Structure")
+                        .setRoof("Metal Roof")
+                        .build();
+        house.showDetails();
+    }
+}
