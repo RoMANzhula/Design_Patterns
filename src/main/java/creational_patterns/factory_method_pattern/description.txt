@@ -4,3 +4,48 @@ Purpose: Allows you to create objects of a specific type through a shared interf
  creation to subclasses.
 
 Мета: Дозволяє створювати об'єкти певного типу через спільний інтерфейс, делегуючи створення підкласам.
+
+
+
+
+
+// Інтерфейс продукту
+interface Shape {
+    void draw();
+}
+
+// Конкретні класи продукту
+class Circle implements Shape {
+    public void draw() {
+        System.out.println("Малюю коло.");
+    }
+}
+
+class Square implements Shape {
+    public void draw() {
+        System.out.println("Малюю квадрат.");
+    }
+}
+
+// Фабричний метод
+class ShapeFactory {
+    public static Shape getShape(String shapeType) {
+        if (shapeType.equalsIgnoreCase("CIRCLE")) {
+            return new Circle();
+        } else if (shapeType.equalsIgnoreCase("SQUARE")) {
+            return new Square();
+        }
+        return null;
+    }
+}
+
+// Використання
+public class Main {
+    public static void main(String[] args) {
+        Shape shape1 = ShapeFactory.getShape("CIRCLE");
+        shape1.draw();
+
+        Shape shape2 = ShapeFactory.getShape("SQUARE");
+        shape2.draw();
+    }
+}
